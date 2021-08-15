@@ -2,6 +2,7 @@ package psql
 
 import (
 	"fmt"
+	"os"
 
 	"gitlab.com/bavatech/development/backend/retail/company-service/company"
 	"gorm.io/driver/postgres"
@@ -34,11 +35,11 @@ func (pg psqlClientConfigs) String() string {
 
 func newPsqlClient() (*gorm.DB, error) {
 	psqlConfigs := psqlClientConfigs{
-		host:     "localhost",
-		user:     "tupi",
-		password: "ancora",
-		dbname:   "companydb",
-		port:     "5432",
+		host:     os.Getenv("DB_HOST"),
+		user:     os.Getenv("DB_USER"),
+		password: os.Getenv("DB_PSWD"),
+		dbname:   os.Getenv("DB_NAME"),
+		port:     os.Getenv("DB_PORT"),
 	}
 	gormConfig := gorm.Config{
 		SkipDefaultTransaction: true,
